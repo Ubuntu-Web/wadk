@@ -1,0 +1,11 @@
+#!/bin/bash
+
+[ -d "app" ] || exit 1
+[ -d "deskfiles" ] || exit 1
+[ -d "hooks" ] || exit 1
+
+[ -f "hooks/postinst" ] || exit 1
+[ -f "hooks/uninst" ] || exit 1
+
+set -euo pipefail
+tar -czvf "../${PWD##*/}.wapp" .

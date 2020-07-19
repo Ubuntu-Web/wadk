@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+if [ $# != 1 ]
+  then echo "Requires 1 argument: <PROJECT_NAME>" && exit 1
+fi
+
+# Delete folder with name '$1' if it exists, and create project folder
+rm -rf '$1' && mkdir "$1"
+
+# Create directory/file structure
+mkdir "$1/app/" "$1/deskfiles/" "$1/hooks/"
+
+# Create post-installation hook
+echo -e "#!/bin/bash
+echo \"This is an example.\"" > "$1/hooks/postinst"
+
+# Create uninstall hook
+echo -e "#!/bin/bash
+echo \"This is an example.\"" > "$1/hooks/uninst"
+
+# index.html
+cat > "$1/app/index.html" <<EOF
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header></header>
+    <main></main>
+    <footer></footer>
+  </body>
+</html>
+EOF
+
+# App Info
+cat > "$1/appinfo" <<EOF
+Name: sample
+EOF
+
+# Desktop File
+echo -e "# Sample Desktop Application Entry
+[Desktop Entry]
+Name=Sample Desktop file
+GenericName=Example
+Comment=This is a sample desktop file.
+Type=Application
+Exec=firefox \"/etc/web-apps/$1/app/index.html\"
+Icon=bell
+Terminal=false
+Categories=Utility;
+Keywords=example;sample;webappsample;gettingstarted;" > "$1/deskfiles/$1.desktop"
+
+echo "Created project: $1"
