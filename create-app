@@ -38,9 +38,7 @@ cat > "$1/app/index.html" <<EOF
 EOF
 
 # App Info
-cat > "$1/appinfo" <<EOF
-Name: sample
-EOF
+echo "Name: $1" > "$1/appinfo"
 
 # Desktop File
 echo -e "# Sample Desktop Application Entry
