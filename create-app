@@ -22,7 +22,7 @@ echo -e "#!/bin/bash
 echo \"This is an example.\"" > "$1/hooks/uninst"
 
 # index.html
-cat > "$1/app/index.html" <<EOF
+cat << 'EOF' > "$1/app/index.html" 
 <!DOCTYPE html>
 <html lang="">
   <head>
